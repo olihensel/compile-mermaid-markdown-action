@@ -8,18 +8,18 @@
 # Usage:
 #   > entrypoint.sh <output path> [<file1> [<file2> ...]]
 
-# For *.mermaid or *.mmd files, it is compiled and a *.mermaid.png is created at the location
+# For *.mermaid or *.mmd files, it is compiled and a *.mermaid.svg is created at the location
 
 # For *.md files:
 #   1) finds all of the mermaid markup in the file
 #   2) creates intermediate files in the output directory *.md.<n>.mermaid where n represents the nth block found
-#   3) compile the mermaid to the directory *.md.<n>.mermaid.png
+#   3) compile the mermaid to the directory *.md.<n>.mermaid.svg
 #   4) place a reference to the compiled image in the markdown
 
 set -euo pipefail
 
 function main {
-  printf "Using MMDC version %s\n" "$(/node_modules/.bin/mmdc -V)"
+  printf "Using MMDC version %s\n" "$(/usr/local/bin/mmdc -V)"
 
   outpath="${1}"
   mkdir -p "${outpath}"
@@ -38,7 +38,7 @@ function main {
       if [[ "${in_file_type}" == "mermaid" || "${in_file_type}" == "mmd" ]]; then
 
         output_path="${in_file_dirname}"
-        output_file="$(dasherize_name ${in_file_basename}).png"
+        output_file="$(dasherize_name ${in_file_basename}).svg"
         c_mermaid "${in_file}" "${output_path}/${output_file}"
 
       elif is_path_markdown "${in_file_basename}" "${MD_SUFFIXES-.md}"; then
@@ -75,7 +75,7 @@ function is_path_markdown {
 function c_mermaid {
   printf "Compiling: %s\n" "${1}"
   printf "Output to: %s\n" "${2}"
-  /node_modules/.bin/mmdc -p /mmdc/puppeteer-config.json -i "${1}" -o "${2}"
+  /usr/local/bin/mmdc -p /puppeteer-config.json -i "${1}" -o "${2}"
   confirm_creation "${2}"
 }
 
@@ -117,11 +117,11 @@ function c_md_mermaid {
     rm "${all_file}x"
 
     # Compile mermaid block"
-    c_mermaid "${block_file}-${block_count}" "${output_path}/${dasherized}-${block_count}.png"
+    c_mermaid "${block_file}-${block_count}" "${output_path}/${dasherized}-${block_count}.svg"
 
     # Compute relative path from the markdown to the tmp_dir
-    image_relative_path=$(realpath --relative-to="${input_dir}" "${output_path}/${dasherized}-${block_count}.png")
-    image_absolute_path="/${output_path}/${dasherized}-${block_count}.png"
+    image_relative_path=$(realpath --relative-to="${input_dir}" "${output_path}/${dasherized}-${block_count}.svg")
+    image_absolute_path="/${output_path}/${dasherized}-${block_count}.svg"
 
     if [[ -z "${ABSOLUTE_IMAGE_LINKS}" ]]; then
       image_path="${image_relative_path}"

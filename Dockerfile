@@ -1,4 +1,5 @@
-FROM neenjaw/mermaid:8.7.0
+# offical image from https://github.com/mermaid-js/mermaid-cli
+FROM minlag/mermaid-cli
 
 WORKDIR /mmdc
 COPY . /mmdc
