@@ -6,5 +6,7 @@ COPY . /mmdc
 
 ENV ENTRYPOINT_PATH /mmdc
 
-ENTRYPOINT [ "/mmdc/entrypoint.sh" ]
+RUN apt-get update && apt install -y bash procps
+
+ENTRYPOINT [ "/bin/bash", "-c", "/mmdc/entrypoint.sh" ]
 CMD [ "--help" ]
