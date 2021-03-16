@@ -26,9 +26,8 @@ function main {
   mkdir -p "${outpath}"
   printf "Got output path: %s\n" "${outpath}"
 
-  shift $(( OPTIND - 1 ))
 
-  for in_file in "$@"; do
+  for in_file in "$2"; do
     printf "Checking if file: \"%s\"\n" "${in_file}"
     if [[ -f "${in_file}" ]]; then
       printf "Attempting compile of: %s\n" "${in_file}"
