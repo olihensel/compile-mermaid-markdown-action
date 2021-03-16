@@ -20,6 +20,7 @@ set -euo pipefail
 
 function main {
   printf "Using MMDC version %s\n" "$(/app/node_modules/.bin/mmdc -V)"
+  printf "Process-Tree: %s\n" "$(ps -aux)"
 
   outpath="${1}"
   mkdir -p "${outpath}"
@@ -28,6 +29,7 @@ function main {
   shift $(( OPTIND - 1 ))
 
   for in_file in "$@"; do
+    printf "Checking if file: \"%s\"\n" "${in_file}"
     if [[ -f "${in_file}" ]]; then
       printf "Attempting compile of: %s\n" "${in_file}"
 
