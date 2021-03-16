@@ -20,9 +20,9 @@ set -euo pipefail
 
 function main {
   printf "Using MMDC version %s\n" "$(/app/node_modules/.bin/mmdc -V)"
-  printf "Process-Tree: %s\n" "$(ps -aux)"
+  printf "Process-Tree: %s\n" "$(ps -eo args)"
 
-  outpath="${1}"
+  outpath="$1"
   mkdir -p "${outpath}"
   printf "Got output path: %s\n" "${outpath}"
 
