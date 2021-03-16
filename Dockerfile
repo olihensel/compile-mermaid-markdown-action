@@ -8,5 +8,5 @@ ENV ENTRYPOINT_PATH /mmdc
 
 RUN apt-get update && apt install -y bash procps
 
-ENTRYPOINT [ "/bin/bash", "-c", "/mmdc/entrypoint.sh" ]
+ENTRYPOINT [ "/mmdc/entrypoint.sh" ]
 CMD [ "--help" ]
