@@ -19,7 +19,7 @@
 set -euo pipefail
 
 function main {
-  printf "Using MMDC version %s\n" "$(/app/node_modules/.bin/mmdc -V)"
+  printf "Using MMDC version %s\n" "$(/usr/local/bin/mmdc -V)"
   printf "Process-Tree: %s\n" "$(ps -eo args)"
 
   outpath="$1"
@@ -76,7 +76,7 @@ function is_path_markdown {
 function c_mermaid {
   printf "Compiling: %s\n" "${1}"
   printf "Output to: %s\n" "${2}"
-  /app/node_modules/.bin/mmdc -p /puppeteer-config.json -i "${1}" -o "${2}"
+  /usr/local/bin/mmdc -p /puppeteer-config.json -i "${1}" -o "${2}"
   confirm_creation "${2}"
 }
 
