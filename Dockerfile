@@ -1,5 +1,5 @@
 # offical image from https://github.com/mermaid-js/mermaid-cli
-FROM minlag/mermaid-cli
+FROM minlag/mermaid-cli:8.9.1
 
 WORKDIR /mmdc
 COPY . /mmdc
