@@ -27,6 +27,7 @@ BEGIN {
   print link;
 
   if (hide_codeblocks) {
+    print "";
     print "<details>";
     print "  <summary>Mermaid markup</summary>";
     details_tag_open=1;
