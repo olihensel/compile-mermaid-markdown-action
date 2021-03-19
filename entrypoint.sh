@@ -119,6 +119,7 @@ function c_md_mermaid {
 
     # Compile mermaid block"
     c_mermaid "${block_file}-${block_count}" "${output_path}/${dasherized}-${block_count}.svg"
+    c_mermaid "${block_file}-${block_count}" "${output_path}/${dasherized}-${block_count}.png"
 
     # Compute relative path from the markdown to the tmp_dir
     image_relative_path=$(realpath --relative-to="${input_dir}" "${output_path}/${dasherized}-${block_count}.svg")
